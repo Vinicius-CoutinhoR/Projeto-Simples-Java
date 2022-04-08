@@ -1,6 +1,7 @@
 package agendaRefeita;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -14,15 +15,15 @@ public class Main {
         System.out.println("Projeto de agenda simples em Java!");
         
         //Arraylist
-        ArrayList<ContatosClasse> contatoLista = new ArrayList<>();
+        List<ContatosClasse> contatoLista = new ArrayList<>();
         
         //Criação do laço while que irá rodar em todo o programa.
         int seletor = 0;
         while(seletor != 5) {
         
         //Menu
-        System.out.printf("Criar contato - 1\n Exibir contato - 2\n Editar contato - 3\n"
-                + " Remover Contato - 4\n Finalizar o programa - 5");
+        System.out.printf("Criar contato - 1\nExibir contato - 2\nEditar contato - 3\n"
+                + "Remover Contato - 4\nFinalizar programa - 5\n");
             
         Scanner input = new Scanner(System.in);
         seletor = input.nextInt();
@@ -53,16 +54,44 @@ public class Main {
                 contatoLista.add(contato);
                 System.out.println("Contato adicionado com sucesso!");
                 
+            //Listagem:    
             } else if (seletor == 2) {
                 
                 System.out.println("Listando: ");
+                
                 int i;
-                System.out.println(contatoLista.size());
-                
-                
-                for(ContatosClasse contatos : contatoLista){
-                    System.out.println(contatoLista);
+                for(i = 0; i < contatoLista.size(); i++) {
+                    System.out.println("Contato: " + i+1);
+                    System.out.println(contatoLista.get(i));
                 }
+                
+            //Edição:    
+            } else if(seletor == 3) {
+                
+                System.out.println("Deseja editar qual contato? ");
+                int escolhaDeContato = input.nextInt();
+                
+                    
+                    
+                
+            //Remover Contato:    
+            } else if (seletor == 4) {
+                System.out.println("Deseja remover todos os contatos? [s/n]");
+                String simNao = input.next();
+                
+                if(simNao.equalsIgnoreCase("s")) {
+                    System.out.println("Removendo todos os contatos...");
+                    contatoLista.removeAll(contatoLista);
+                    
+                } else {
+                    System.out.println("Escolha o contato que deseja remover: ");
+                    int escolhaDeContato = input.nextInt() - 1;
+                    contatoLista.remove(escolhaDeContato);
+                }
+              
+                 
+            } else {
+                System.out.println("Programa finalizado.");
             }
         }
     }
