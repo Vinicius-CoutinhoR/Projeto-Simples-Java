@@ -12,23 +12,27 @@ public class Main {
     
     public static void main(String[] args) {
         System.out.println("Projeto de agenda simples em Java!");
-        System.out.printf("Criar contato - 1\n Exibir contato - 2\n Editar contato - 3\n"
-                + " Remover Contato - 4\n Finalizar o programa - 5");
+        
+        //Arraylist
+        ArrayList<ContatosClasse> contatoLista = new ArrayList<>();
         
         //Criação do laço while que irá rodar em todo o programa.
         int seletor = 0;
-        
         while(seletor != 5) {
+        
+        //Menu
+        System.out.printf("Criar contato - 1\n Exibir contato - 2\n Editar contato - 3\n"
+                + " Remover Contato - 4\n Finalizar o programa - 5");
+            
         Scanner input = new Scanner(System.in);
         seletor = input.nextInt();
             
-            ArrayList<ContatosClasse> contatoLista = new ArrayList<>();
-            
+            //Criar contatos:
             if(seletor == 1) {
-                String nome;
                 String scanBug;
                 
                 System.out.println("Insira o nome: ");
+                String nome;
                 scanBug = input.nextLine();
                 nome = input.nextLine();
                 
@@ -43,17 +47,21 @@ public class Main {
                 System.out.println("Insira o endereço: ");
                 String endereco;
                 endereco = input.nextLine();
+              
+                ContatosClasse contato = new ContatosClasse(nome,telefone,email,endereco);
                 
-                ContatosClasse contato = new ContatosClasse(nome, telefone, email, endereco);
                 contatoLista.add(contato);
                 System.out.println("Contato adicionado com sucesso!");
                 
             } else if (seletor == 2) {
+                
                 System.out.println("Listando: ");
-                for(int i = 0; i < contatoLista.size(); i++) {
-                    System.out.println("Listando: 111 " + contatoLista.get(i));
-                    
-                    
+                int i;
+                System.out.println(contatoLista.size());
+                
+                
+                for(ContatosClasse contatos : contatoLista){
+                    System.out.println(contatoLista);
                 }
             }
         }
