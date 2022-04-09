@@ -8,6 +8,10 @@ public class ContatosClasse {
     String email;
     String endereco;
     
+    ContatosClasse() {
+        
+    }
+    
     ContatosClasse(String nome, String telefone, String email, String endereco) {
         this.nome = nome;
         this.telefone = telefone;
@@ -53,7 +57,7 @@ public class ContatosClasse {
     
     //Retornar em String:
     public String toString() {
-        return "\nNome: " + this.nome + "\nTelefone: " + this.telefone + 
+        return "Nome: " + this.nome + "\nTelefone: " + this.telefone + 
                 "\nEmail: " + this.email + "\nEndereço: " + this.endereco + "\n";
     }
     

@@ -12,87 +12,188 @@ public class Main {
     //endereço
     
     public static void main(String[] args) {
-        System.out.println("Projeto de agenda simples em Java!");
+        System.out.println("A simple contact list in Java!");
+        String scanBug;
         
         //Arraylist
-        List<ContatosClasse> contatoLista = new ArrayList<>();
+        List<ContatosClasse> contactList = new ArrayList<>();
         
         //Criação do laço while que irá rodar em todo o programa.
         int seletor = 0;
         while(seletor != 5) {
         
         //Menu
-        System.out.printf("Criar contato - 1\nExibir contato - 2\nEditar contato - 3\n"
-                + "Remover Contato - 4\nFinalizar programa - 5\n");
+        System.out.printf("Create contacts - 1\nList contacts - 2\nEdit contacts - 3\n"
+                + "Remove contacts - 4\nEnd program - 5\n");
             
         Scanner input = new Scanner(System.in);
         seletor = input.nextInt();
             
             //Criar contatos:
             if(seletor == 1) {
-                String scanBug;
                 
-                System.out.println("Insira o nome: ");
-                String nome;
-                scanBug = input.nextLine();
-                nome = input.nextLine();
+                criaContato(input, contactList);
                 
-                System.out.println("Insira o telefone: ");
-                String telefone;
-                telefone = input.nextLine();
-                
-                System.out.println("Insira o email: ");
-                String email;
-                email = input.nextLine();
-                
-                System.out.println("Insira o endereço: ");
-                String endereco;
-                endereco = input.nextLine();
-              
-                ContatosClasse contato = new ContatosClasse(nome,telefone,email,endereco);
-                
-                contatoLista.add(contato);
-                System.out.println("Contato adicionado com sucesso!");
-                
-            //Listagem:    
             } else if (seletor == 2) {
                 
-                System.out.println("Listando: ");
+                listaContato(contactList, input);
                 
-                int i;
-                for(i = 0; i < contatoLista.size(); i++) {
-                    System.out.println("Contato: " + i+1);
-                    System.out.println(contatoLista.get(i));
-                }
-                
-            //Edição:    
             } else if(seletor == 3) {
                 
                 System.out.println("Deseja editar qual contato? ");
                 int escolhaDeContato = input.nextInt();
+                
+                System.out.println("Deseja editar todo o contato? [s/n]");
+                String simNao = input.next();
+                
+                if(simNao.equalsIgnoreCase("s")) {
+                
+                    System.out.println("Insira o nome: ");
+                    String nome;
+                    scanBug = input.nextLine();
+                    nome = input.nextLine();
+
+                    System.out.println("Insira o telefone: ");
+                    String telefone;
+                    telefone = input.nextLine();
+
+                    System.out.println("Insira o email: ");
+                    String email;
+                    email = input.nextLine();
+
+                    System.out.println("Insira o endereço: ");
+                    String endereco;
+                    endereco = input.nextLine();
+
+                    ContatosClasse contato = new ContatosClasse(nome,telefone,email,endereco);
+
+                    contactList.remove(escolhaDeContato);
+                    contactList.add(escolhaDeContato, contato);
+                    
+                    System.out.println("Contato editado com sucesso!");
+                    
+                } else {
+                    
+                    /*Funcionalidade de alteração por atributos ainda não disponível*/
+                    
+                    int seletorAtributo;
+                    System.out.println("Escolha um dos atributos para alterar: ");
+                    System.out.println("Alterar nome - 1");
+                    System.out.println("Alterar telefone - 2");
+                    System.out.println("Alterar email - 3");
+                    System.out.println("Alterar endereco - 4");
+                    
+                    ContatosClasse contato = new ContatosClasse();
+                    //Entrada:
+                    seletorAtributo = input.nextInt();
+                    
+                    if(seletorAtributo == 1) {
+                        //System.out.println("Digite o novo nome: ");
+                        //String nome = input.nextLine();
+                        //contato.setNome(nome);
+                        
+                        
+                    } else if (seletorAtributo == 2) {
+
+                    } else if (seletorAtributo == 3) {
+                        
+                    } else if (seletorAtributo == 4) {
+                        
+                    }
+                }
+                
+                
                 
                     
                     
                 
             //Remover Contato:    
             } else if (seletor == 4) {
-                System.out.println("Deseja remover todos os contatos? [s/n]");
-                String simNao = input.next();
                 
-                if(simNao.equalsIgnoreCase("s")) {
-                    System.out.println("Removendo todos os contatos...");
-                    contatoLista.removeAll(contatoLista);
-                    
-                } else {
-                    System.out.println("Escolha o contato que deseja remover: ");
-                    int escolhaDeContato = input.nextInt() - 1;
-                    contatoLista.remove(escolhaDeContato);
-                }
+                removeContato(input, contactList);
               
-                 
             } else {
-                System.out.println("Programa finalizado.");
+                
+                encerraPrograma();
+                
             }
         }
+    }
+
+    private static void encerraPrograma() {
+        System.out.println("Programa finalizado.");
+    }
+
+    private static void removeContato(Scanner input, List<ContatosClasse> contatoLista) {
+        System.out.println("Deseja remover todos os contatos? [s/n]");
+        String simNao = input.next();
+        
+        if(simNao.equalsIgnoreCase("s")) {
+            System.out.println("Removendo todos os contatos...");
+            contatoLista.removeAll(contatoLista);
+            
+        } else {
+            System.out.println("Escolha o contato que deseja remover: ");
+            int escolhaDeContato = input.nextInt() - 1;
+            contatoLista.remove(escolhaDeContato);
+            System.out.println("Contato removido com sucesso!");
+        }
+    }
+
+    private static void listaContato(List<ContatosClasse> contatoLista, Scanner input) {
+        if(contatoLista.size() == 0) {
+            
+            System.out.println("A agenda não posssui contatos.");
+            
+        } else {
+            System.out.println("Você deseja listar todos os contatos? [s/n]");
+            String simNao;
+            simNao = input.next();
+            
+            if(simNao.equalsIgnoreCase("s")) {
+                System.out.println("Listando contatos: ");
+                int i;
+                int j = 1;
+                
+                //Tive que usar o int j porque estava bugando ao utilizar o i+1 para exibir
+                //O contato, "Contato 01" depois "Contato 11" usando o J corrigiu esse problema.
+                for(i = 0; i < contatoLista.size(); i++) {
+                    System.out.println("Contato ID: " + j);
+                    System.out.println(contatoLista.get(i));
+                    j++;
+                }
+                
+            } else {
+                System.out.println("Digite o id do contato que deseja buscar: ");
+                int escolhaDeContato;
+                escolhaDeContato = input.nextInt() - 1;
+                
+                System.out.println(contatoLista.get(escolhaDeContato));
+            }
+        }
+        
+        //Edição:    
+    }
+
+    public static void criaContato(Scanner input, List<ContatosClasse> contatoLista) {
+        String scanBug;
+        System.out.println("Insira o nome: ");
+        String nome;
+        scanBug = input.nextLine();
+        nome = input.nextLine();
+        System.out.println("Insira o telefone: ");
+        String telefone;
+        telefone = input.nextLine();
+        System.out.println("Insira o email: ");
+        String email;
+        email = input.nextLine();
+        System.out.println("Insira o endereço: ");
+        String endereco;
+        endereco = input.nextLine();
+        ContatosClasse contato = new ContatosClasse(nome,telefone,email,endereco);
+        contatoLista.add(contato);
+        System.out.println("Contato adicionado com sucesso!");
+        
+        //Listagem:    
     }
 }
